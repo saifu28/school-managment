@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN LOGIN</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+</head>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .container div {
+        margin-top: 15%;
+        line-height: 40px;
+    }
+
+    H3 {
+        font-family: sans-serif;
+    }
+
+    input {
+        width: 300px;
+        height: 30px;
+    }
+
+    #btn {
+        width: 70px;
+        height: 25px;
+        background-color: rgb(21, 21, 55);
+        border-radius: 7px;
+        color: white;
+        font-family: sans-serif;
+    }
+
+    #btn:hover {
+        background-color: rgb(57, 57, 104);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div>
+            <H3>ADMIN LOGIN</H3>
+            <input type="text" placeholder="Username" id="username"><br>
+            <input type="password" placeholder="Password" name="" id="password"><br>
+            <button id="btn">Submit </button>
+            <span id="span1"></span>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    $(document).ready(function(){
+
+        $('#btn').click(function(){
+            username = $('#username').val()
+            password = $('#password').val()
+            console.log(username,password)
+            $.ajax({
+                url:'http://127.0.0.1:8000/school_admin/admin_home',
+                data:{
+                    'username':username,
+                    'password':password
+                },
+                type:'POST',
+                success:function(response){
+                    if(response.status == true){
+                        window.location.href = 'http://127.0.0.1:5500/school_admin/home.html'
+                    }
+                    else{
+                        $('#span1').html('<br>Login username or password is not match')
+                    }
+
+
+
+
+                }
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+    })
+
+
+</script>
+
+</html>

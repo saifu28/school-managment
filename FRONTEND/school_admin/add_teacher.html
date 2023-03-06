@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        /* navbar */
+        .nav {
+            background-color: rgb(32, 32, 32);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .page a {
+            text-decoration: none;
+            color: white;
+            font-family: sans-serif;
+            font-size: 18px;
+            font-weight: bolder;
+            margin: 10px;
+        }
+
+        .page a:hover {
+            font-size: 15px;
+        }
+
+        /* navbar end  */
+
+        .container {
+            width: 100%;
+            background-color: rgb(44, 44, 44);
+            height: 623px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .from_box {
+            padding: 30px;
+            background-color: rgb(32, 32, 32);
+            border-radius: 7px;
+        }
+
+        .from_box input {
+            width: 300px;
+            height: 25px;
+            font-family: sans-serif;
+        }
+
+        .from_box textarea {
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+
+        #btn {
+            background-color: rgb(45, 117, 45);
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        #btn:hover {
+            background-color: rgb(127, 127, 127);
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="page"><a href="add_teacher.html">ADD TEACHER</a></div>
+        <div class="page"><a href="view_teacher.html">VIEW TEACHER</a></div>
+        <div class="page"><a href="view_student.html">VIEW STUDENT</a></div>
+    </div>
+    <div class="container">
+        <div class="from_box">
+            <input type="text" placeholder="Name" name="" id="name"><br><br>
+            <input type="number" placeholder="Age" name="" id="age"><br><br>
+            <input type="number" placeholder="Phone" name="" id="phone"><br><br>
+            <input type="text" placeholder="Gender" name="" id="gender"><br><br>
+            <input type="email" placeholder="Email" name="" id="email"><br><br>
+            <textarea name="" id="address" cols="39" rows="5" placeholder="Address"></textarea><br><br>
+            <input type="text" placeholder="Username" name="" id="username"><br><br>
+            <input type="password" placeholder="Password" name="" id="password"><br><br>
+            <span style="color: white;" id="span1"></span><br><br>
+            <input type="submit" name="" id="btn">
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            $('#btn').click(function(){
+                var teacher_data = {
+                    'name' :$('#name').val(),
+                    'age' :$('#age').val(),
+                    'phone':$('#phone').val(),
+                    'gender':$('#gender').val(),
+                    'email':$('#email').val(),
+                    'address':$('#address').val(),
+                    'username':$('#username').val(),
+                    'password':$('#password').val()
+
+                }
+                console.log(teacher_data)
+                $.ajax({
+                    url : 'http://127.0.0.1:8000/teacher/add_teacher',
+                    data : teacher_data,
+                    type : 'POST',
+                    success:function(response){
+                        console.log(response.msg)
+                        $('#span1').html(response.msg)
+                    }
+                })
+
+            })
+
+
+
+        })
+    </script>
+</body>
+
+</html>
